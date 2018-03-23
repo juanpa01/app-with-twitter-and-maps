@@ -7,11 +7,13 @@ end
 
 gem 'devise', '~> 4.3.0'
 
-
+gem 'bootstrap', '~> 4.0.0'
+gem 'jquery-rails'
 gem "omniauth"
 gem "omniauth-twitter"
 gem 'twitter', '~> 5.13.0'
 gem 'gmaps4rails'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'

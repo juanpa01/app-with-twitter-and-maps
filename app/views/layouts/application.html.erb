@@ -10,12 +10,11 @@
     <%= javascript_include_tag '//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js'%>
     <%= javascript_include_tag '//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js', type: 'text/javascript'%>
   </head>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
-
   <body>
+    <%= render "partials/nav_bar"%>
     <%= yield %>
+
+     <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
   </body>
 </html> 

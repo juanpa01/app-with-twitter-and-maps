@@ -3,24 +3,19 @@ class HomeController < ApplicationController
   before_action :create_client
 
   def index
-  	batch_size = 10
+  	
+ end
+
+  def location_tweets
+    batch_size = 10
     @twitter_handle = "juan_pablo_utp"
 
-    #@friends = @client.friends("juan_pablo_utp").take(batch_size)
-
-    #@tweets = @client.user_timeline(@twitter_handle).take(batch_size)    
-   	@friends = @client.friends(@twitter_handle).take(batch_size)
-    #@followers = @client.followers(@twitter_handle).take(batch_size)
+      @friends = @client.friends(@twitter_handle).take(batch_size)
 
     @names = []
     for i in (0...@friends.count)
       @name = @friends[i][:screen_name]
-      @names.push(@name)
-    end
-    @tweets = []
-    for i in (0...@names.count)
-      @tweet = @client.user_timeline(@names[i]).take(1) 
-      @tweets.concat(@tweet)
+      @tweet = @client.user_timeline(@name).take(1) 
       location = Location.new(
         name: @tweet[0][:user][:name],
         latitude: @tweet[0][:geo][:coordinates][0],
@@ -28,11 +23,39 @@ class HomeController < ApplicationController
         )
       location.save!
     end
+
     @locations = Location.all
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       if location.latitude != nil  && location.length != nil
         marker.lat location.latitude
         marker.lng location.length
+        marker.infowindow location.name
+      end
+    end
+  end
+
+  def location_friends
+    batch_size = 10
+    @twitter_handle = "juan_pablo_utp"
+
+    @friends = @client.friends(@twitter_handle).take(batch_size)
+    @name = ""
+    for i in (0...@friends.count)
+      @name = @name + @friends[i][:name] + "  "
+      location = Location.new(
+        name: @name,
+        latitude: @friends[i][:status][:place][:bounding_box][:coordinates][0][0][1],
+        length: @friends[i][:status][:place][:bounding_box][:coordinates][0][0][0]
+        )
+      location.save!
+    end
+
+    @locations = Location.all
+    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+      if location.latitude != nil  && location.length != nil
+        marker.lat location.latitude
+        marker.lng location.length
+        marker.infowindow location.name
       end
     end
   end
