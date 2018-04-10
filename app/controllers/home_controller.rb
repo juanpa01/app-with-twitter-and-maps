@@ -3,8 +3,11 @@ class HomeController < ApplicationController
   before_action :create_client
 
   def index
-  	
- end
+
+  client = SODA::Client.new({:domain => "www.datos.gov.co", :app_token => "F82AtyM4MKYkhVZTbTUYMKpPl"})
+
+  @results = client.get("xxxy-rt5e", {"$limit" => 5, "$where" => "departamento = 'CUNDINAMARCA'"})
+  end
 
   def location_tweets
     batch_size = 10
