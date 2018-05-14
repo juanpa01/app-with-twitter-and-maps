@@ -1,2 +1,45 @@
-<h4><%= current_user.email%></h4>
- <%= debug @results%>
+<h4><%#= current_user.email%></h4>
+<div class="container">
+	<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Departamento</th>
+      <th scope="col">Cantidad en gramos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row">Cundinamarca</td>
+      <td><%= @data_cundinamarca%></td>
+    </tr>
+    <tr>
+      <td scope="row">Antioquia</td>
+      <td><%= @data_antioquia %></td>
+    </tr>
+    <tr>
+      <td scope="row">Valle del Cauca</td>
+      <td><%= @data_valle_cauca%></td>
+    </tr>
+    <tr>
+    	<td scope="row">Atlantico</td>
+    	<td><%= @data_atlantico%></td>
+    </tr>
+    <tr>
+    	<td scope="row">Bolivar</td>
+    	<td><%= @data_bolivar %></td>
+    </tr>
+    <tr>
+    	<td scope="row">Norte de Santander</td>
+    	<td><%= @data_norte_santander %></td>
+    </tr>
+    <tr>
+    	<td scope="row">Risaralda</td>
+    	<td><%= @data_risaralda %></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+ <%= image_tag @radar%>
+</div>
+
+

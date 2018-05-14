@@ -6,8 +6,6 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
     	<% if current_user%>
-			<%= link_to "Ubicacion de los tweets", home_location_tweets_path, class:"nav-item nav-link"%>  
-			<%= link_to "Ubicacion de amigos", home_location_friends_path, class:"nav-item nav-link" %>  
 		 	<%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete,class:"nav-item nav-link"	%>
 		<% else%>
 			<%= link_to "Iniciar sesion", new_user_session_path%>
