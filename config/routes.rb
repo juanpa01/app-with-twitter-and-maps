@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :chat_rooms, only: [:new, :create, :show, :index]
+  #root 'chat_rooms#index'
+  mount ActionCable.server => '/cable'
   resources :tweets
-  #devise_for :users
-
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
   get "home/location_tweets"
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
 
 	devise_scope :user do
 		authenticated :user do
-			root 'home#index', as: :authenticated_root
+			root 'chat_rooms#index', as: :authenticated_root
 		end
 
 		unauthenticated :user do

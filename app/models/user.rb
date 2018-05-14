@@ -4,10 +4,19 @@ class User < ApplicationRecord
   #devise :database_authenticatable, :registerable,
   #       :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :chat_rooms, dependent: :destroy
+  has_many :messages, dependent: :destroy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:twitter, :facebook]
- 
+
+
+  
+  def name
+  email.split('@')[0]
+  end
+
   def self.find_for_oauth(auth, signed_in_resource = nil)
     token = auth.credentials.token
     secret = auth.credentials.secret
